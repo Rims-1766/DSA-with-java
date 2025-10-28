@@ -1,0 +1,83 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct linearList{
+	int key;
+	int value;
+	struct linearList *next;
+};
+struct linearList* head = NULL;
+struct linearList* createnode(){
+	int key,value;
+	int count=0;
+	printf("enter key");
+	scanf("%d",&key);
+	printf("enter value\n");
+	scanf("%d",&value);
+	struct linearList* newnode=(struct linearList*)malloc(sizeof(struct linearList));
+	newnode->key= key;
+	newnode->value= value;
+	newnode->next = NULL;
+	count++;
+	return newnode;
+}
+void createList(){
+	int value,n;
+	int key;
+	struct linearList* temp = NULL;
+	printf("enter nodes \n");
+	scanf("%d",&n);
+	int i;
+	for(i=0; i<n;i++){
+		struct linearList* newnode = createnode(key,value);
+		if(head == NULL){
+			head = newnode;
+			temp=head;
+		}else{
+			temp->next=newnode;
+			temp= newnode;
+		}
+	}
+}
+void search(){
+	int index;
+	printf("enter the index to search\n");
+	scanf("%d",&index);
+	struct linearList* temp=head;
+	while(temp!=NULL){
+		if(temp->key==index)
+			printf("%d\n",temp->value);
+			temp=temp->next;
+		
+	}
+}
+void insertion(){
+	struct linearList* newnode=createnode();
+	if(head == NULL){
+		head=newnode;
+	}else{
+		struct linearList* temp=head;
+		while(temp->next!=NULL){
+			temp=temp->next;
+		}
+		temp->next=newnode;
+	}
+}
+void display(){
+	if(head == NULL)
+		printf("list is full");
+	struct linearList* temp = head;
+	while(temp!=NULL){
+		printf("key:%d,value:%d\n",temp->key,temp->value);
+		temp = temp-> next;
+	}
+	printf("\n");
+}
+int main(){
+	createList();
+	display();
+	search();
+	display();
+	insertion();
+	display();
+	return 0;
+}
